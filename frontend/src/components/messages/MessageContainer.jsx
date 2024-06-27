@@ -50,5 +50,3 @@ const NoChatSelected = () => {
         </div>
     )
 }
-
-
