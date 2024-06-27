@@ -26,7 +26,7 @@ export const signup = async (req,res) =>{
         password:hashedPassword,
        
         gender,
-        profilePic:gender === "male"? boyProfilePic : girlProfilePic
+        profilePic:gender === "male"? boyProfilePic : girlProfilePic,
     })
     if(newUser){
          generateTokenandsetcookie(newUser._id,res);
@@ -41,7 +41,7 @@ export const signup = async (req,res) =>{
     }
     }
     catch(error){
-        console.log(error)
+        console.log("Error in signup controller",error.message)
         res.json({error:"Internal Server error"})
 
     }
@@ -56,11 +56,11 @@ export const login = async(req,res) =>{
 
         if(!user || !isPasswordCorrect)
 
-        res.json({error:"Invalid Credentials"
+    return    res.json({error:"Invalid Credentials"
     })
-    generateTokenandsetcookie(newUser._id,res);
+    generateTokenandsetcookie(user._id,res);
     res.json({
-        _id:newUser._id, 
+        _id:user._id, 
         fullName: user.fullName,
         username: user.username,
         profilePic: user.profilePic
@@ -69,12 +69,12 @@ export const login = async(req,res) =>{
 }
     catch(error){
         console.log("error in login ",error.message)
-        res.json({succes:false,message:error})
+        res.json({error:"Internal Server error"})
 
     }
 }
 
-export const logout = async(req,res) =>{
+export const logout = (req,res) =>{
    try{
     res.cookie("jwt","",{maxAge:0})
     res.json({message:"Logged out SUccessfully"})
