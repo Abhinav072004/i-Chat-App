@@ -29,6 +29,7 @@ export const signup = async (req,res) =>{
         profilePic:gender === "male"? boyProfilePic : girlProfilePic,
     })
     if(newUser){
+        // Generate JWT token here
          generateTokenandsetcookie(newUser._id,res);
     await newUser.save();
     res.json({_id:newUser._id, 
@@ -56,7 +57,7 @@ export const login = async(req,res) =>{
 
         if(!user || !isPasswordCorrect)
 
-    return    res.json({error:"Invalid Credentials"
+    return res.json({error:"Invalid Credentials"
     })
     generateTokenandsetcookie(user._id,res);
     res.json({

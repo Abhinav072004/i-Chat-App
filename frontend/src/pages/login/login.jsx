@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import {Link} from 'react-router-dom';
-import useLogin from '../../hooks/useLogin';
+import uselogin from '../../hooks/useLogin';
 
-const login = () => {
+const Login = () => {
     const [username,setUsername] = useState("");
     const [password,setPassword] = useState("");
-    const {loading,login}= useLogin()
+    const {loading,login}= uselogin()
 
     const handleSubmit = async (e)=>{
         e.preventDefault();
@@ -59,4 +59,4 @@ className='w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-
   )
 }
 
-export default login
+export default Login

@@ -33,7 +33,8 @@ export const  sendMessage =  async (req,res) =>{
         // await conversation.save();
         // await newMessage.save();
         await Promise.all([conversation.save(), newMessage.save()]);
-        const receiverSocketId = await getReceiverSocketId(receiverId);
+
+        const receiverSocketId =  getReceiverSocketId(receiverId);
 
         if (receiverSocketId) {
 			// io.to(<socket_id>).emit() used to send events to specific client
@@ -58,7 +59,7 @@ export const getMessages = async(req,res)=>{
             participants: {$all:[senderId,userToChatId]}
         }).populate("messages")
         if(!conversation){
-            return res.json({error: "No conversation found"})
+            return res.json([]);
         }
 
         const messages= conversation.messages;
