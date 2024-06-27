@@ -13,6 +13,8 @@ const __dirname = path.resolve();
 const PORT = process.env.PORT||3001;
 
 
+
+
 app.use(express.json());
 app.use(cookieParser());
 
@@ -21,10 +23,10 @@ app.use("/api/auth",authRoutes);
 app.use("/api/messages",messageRoutes)
 app.use("/api/users", userRoutes)
 
-app.use(express.static(path.join(__dirname, "/frontend/dist")));
+app.use(express.static(path.join(__dirname, "/frontend/vite-project/dist")));
 
 app.get("*", (req, res) => {
-	res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
+	res.sendFile(path.join(__dirname, "frontend","vite-project", "dist", "index.html"));
 });
 
 server.listen(PORT ,()=>{
